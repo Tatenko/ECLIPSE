@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="myProcess" name="My process" isExecutable="true">
+    <startEvent id="startevent1" name="Start">
+      <extensionElements>
+        <activiti:formProperty id="Location" name="Выбор области или города" type="select" default="0" required="true"></activiti:formProperty>
+        <activiti:formProperty id="LastName" name="Фамилия" type="string" required="true"></activiti:formProperty>
+        <activiti:formProperty id="FirstName" name="Имя" type="string" required="true"></activiti:formProperty>
+        <activiti:formProperty id="midleName" name="Отчество" type="string" required="true"></activiti:formProperty>
+        <activiti:formProperty id="S_Passport" name="Паспортные данные Серия_Номер" type="string" required="true"></activiti:formProperty>
+        <activiti:formProperty id="scan_Passport" name="Скан паспорта" type="file" required="true"></activiti:formProperty>
+        <activiti:formProperty id="INN" name="Номер ИНН" type="string" required="true"></activiti:formProperty>
+        <activiti:formProperty id="Inform" name="Информация о юридическом или физическом лице" type="string" required="true"></activiti:formProperty>
+        <activiti:formProperty id="Email" name="Электронный адрес почтового ящика" type="string" required="true"></activiti:formProperty>
+        <activiti:formProperty id="Phone" name="Телефон" type="string" required="true"></activiti:formProperty>
+        <activiti:formProperty id="Nomber_Date" name="Номер и дата выдачи разрешения на размещение внешней рекламы" type="string" required="true"></activiti:formProperty>
+        <activiti:formProperty id="Inform_Object" name="Информация об обьекте" type="string"></activiti:formProperty>
+      </extensionElements>
+    </startEvent>
+    <serviceTask id="servicetask1" name="Уведомление регестрации"></serviceTask>
+    <serviceTask id="servicetask2" name="Уведомление компании"></serviceTask>
+    <sequenceFlow id="flow3" sourceRef="servicetask1" targetRef="servicetask2"></sequenceFlow>
+    <userTask id="usertask1" name="Этап 1 Проверка входных данных">
+      <extensionElements>
+        <activiti:formProperty id="LastName" name="Фамилия" type="string" writable="false" required="true"></activiti:formProperty>
+        <activiti:formProperty id="FirstName" name="Имя" type="string" writable="false" required="true"></activiti:formProperty>
+        <activiti:formProperty id="middleName" name="Отчество" type="string" writable="false" required="true"></activiti:formProperty>
+        <activiti:formProperty id="decision_1" name="Принято решение о рассмотрении предоставления разрешения" type="enum" required="true">
+          <activiti:value id="accept" name="Расмотреть разрешение"></activiti:value>
+          <activiti:value id="reject" name="Отказать в расмотрении разрешения"></activiti:value>
+        </activiti:formProperty>
+        <activiti:formProperty id="Data_z" name="Дата подачи запроса" type="string" writable="false" required="true"></activiti:formProperty>
+        <activiti:formProperty id="S_Passport" name="Паспортные данные Серия_Номер" type="string" writable="false" required="true"></activiti:formProperty>
+        <activiti:formProperty id="INN" name="Номер ИНН" type="string" writable="false" required="true"></activiti:formProperty>
+        <activiti:formProperty id="Email" name="Электронный адрес почтового ящика" type="string" writable="false" required="true"></activiti:formProperty>
+        <activiti:formProperty id="Phone" name="Телефон" type="string" writable="false" required="true"></activiti:formProperty>
+        <activiti:formProperty id="comment_1" name="Комментарий в случае отказа" type="textArea"></activiti:formProperty>
+        <activiti:formProperty id="scan_Passport" name="Скан паспрта" type="file" writable="false"></activiti:formProperty>
+        <activiti:formProperty id="S_Name_Organ" name="Имя" type="string" writable="false"></activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow4" sourceRef="servicetask2" targetRef="usertask1"></sequenceFlow>
+    <serviceTask id="servicetask3" name="Уведомление об отказе"></serviceTask>
+    <serviceTask id="servicetask4" name="Уведомление о расмотрении запроса"></serviceTask>
+    <userTask id="usertask2" name="Этап 2 Подтверждение выдачи дубликата разрешения">
+      <extensionElements>
+        <activiti:formProperty id="S_Name_Organ" name="Имя" type="string" writable="false"></activiti:formProperty>
+        <activiti:formProperty id="Data_z" name="Дата подачи запроса" type="string" writable="false"></activiti:formProperty>
+        <activiti:formProperty id="LastName" name="Фамилия" type="string" writable="false"></activiti:formProperty>
+        <activiti:formProperty id="FirstName" name="Имя" type="string" writable="false"></activiti:formProperty>
+        <activiti:formProperty id="middleName" name="Отчество" type="string" writable="false"></activiti:formProperty>
+        <activiti:formProperty id="S_Passport" name="Паспортные данные Серия_Номер" type="string" writable="false"></activiti:formProperty>
+        <activiti:formProperty id="INN" name="Номер ИНН" type="string" writable="false"></activiti:formProperty>
+        <activiti:formProperty id="Email" name="Электронный адрес почтового ящика" type="string" writable="false"></activiti:formProperty>
+        <activiti:formProperty id="Phone" name="Телефон" type="string" writable="false"></activiti:formProperty>
+        <activiti:formProperty id="decision_2" name="Принято решение о рассмотрении предоставления разрешения" type="enum" required="true">
+          <activiti:value id="accept" name="Разрешить"></activiti:value>
+          <activiti:value id="reject" name="Отказано"></activiti:value>
+        </activiti:formProperty>
+        <activiti:formProperty id="comment_2" name="Комментарий в случае отказа" type="textArea"></activiti:formProperty>
+        <activiti:formProperty id="scan_Passport" name="Скан паспорта" type="file" writable="false"></activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow8" sourceRef="servicetask4" targetRef="usertask2"></sequenceFlow>
+    <exclusiveGateway id="exclusivegateway2" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow9" sourceRef="usertask2" targetRef="exclusivegateway2"></sequenceFlow>
+    <serviceTask id="servicetask5" name="Уведомление об отказе"></serviceTask>
+    <sequenceFlow id="flow10" name="Отказ" sourceRef="exclusivegateway2" targetRef="servicetask5">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${decision_1=='reject'}]]></conditionExpression>
+    </sequenceFlow>
+    <serviceTask id="servicetask6" name="Уведомление о принятие разрешения на размещении внешней рекламы"></serviceTask>
+    <sequenceFlow id="flow11" name="Принято" sourceRef="exclusivegateway2" targetRef="servicetask6">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${decision_1=='accept'}]]></conditionExpression>
+    </sequenceFlow>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="flow12" sourceRef="servicetask6" targetRef="endevent1"></sequenceFlow>
+    <endEvent id="endevent2" name="End"></endEvent>
+    <sequenceFlow id="flow13" sourceRef="servicetask3" targetRef="endevent2"></sequenceFlow>
+    <sequenceFlow id="flow14" sourceRef="servicetask5" targetRef="endevent1"></sequenceFlow>
+    <sequenceFlow id="flow15" sourceRef="startevent1" targetRef="servicetask1"></sequenceFlow>
+    <exclusiveGateway id="exclusivegateway3" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow18" sourceRef="usertask1" targetRef="exclusivegateway3"></sequenceFlow>
+    <sequenceFlow id="flow19" name="Принято" sourceRef="exclusivegateway3" targetRef="servicetask4">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${decision_1=='accept'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow20" name="Отказ" sourceRef="exclusivegateway3" targetRef="servicetask3" skipExpression="Отклонение">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${decision_1=='reject'}]]></conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_myProcess">
+    <bpmndi:BPMNPlane bpmnElement="myProcess" id="BPMNPlane_myProcess">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="10.0" y="50.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask1" id="BPMNShape_servicetask1">
+        <omgdc:Bounds height="61.0" width="105.0" x="120.0" y="23.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask2" id="BPMNShape_servicetask2">
+        <omgdc:Bounds height="61.0" width="105.0" x="280.0" y="37.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask1" id="BPMNShape_usertask1">
+        <omgdc:Bounds height="61.0" width="105.0" x="437.0" y="37.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask3" id="BPMNShape_servicetask3">
+        <omgdc:Bounds height="62.0" width="105.0" x="577.0" y="23.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask4" id="BPMNShape_servicetask4">
+        <omgdc:Bounds height="82.0" width="105.0" x="437.0" y="130.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask2" id="BPMNShape_usertask2">
+        <omgdc:Bounds height="89.0" width="115.0" x="288.0" y="128.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway2" id="BPMNShape_exclusivegateway2">
+        <omgdc:Bounds height="40.0" width="40.0" x="218.0" y="156.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask5" id="BPMNShape_servicetask5">
+        <omgdc:Bounds height="61.0" width="105.0" x="70.0" y="100.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask6" id="BPMNShape_servicetask6">
+        <omgdc:Bounds height="85.0" width="121.0" x="70.0" y="176.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="10.0" y="173.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent2" id="BPMNShape_endevent2">
+        <omgdc:Bounds height="35.0" width="35.0" x="730.0" y="43.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway3" id="BPMNShape_exclusivegateway3">
+        <omgdc:Bounds height="40.0" width="40.0" x="635.0" y="128.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="225.0" y="53.0"></omgdi:waypoint>
+        <omgdi:waypoint x="280.0" y="67.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="385.0" y="67.0"></omgdi:waypoint>
+        <omgdi:waypoint x="437.0" y="67.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
+        <omgdi:waypoint x="437.0" y="171.0"></omgdi:waypoint>
+        <omgdi:waypoint x="403.0" y="172.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow9" id="BPMNEdge_flow9">
+        <omgdi:waypoint x="288.0" y="172.0"></omgdi:waypoint>
+        <omgdi:waypoint x="258.0" y="176.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow10" id="BPMNEdge_flow10">
+        <omgdi:waypoint x="218.0" y="176.0"></omgdi:waypoint>
+        <omgdi:waypoint x="122.0" y="161.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="30.0" x="190.0" y="151.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow11" id="BPMNEdge_flow11">
+        <omgdi:waypoint x="218.0" y="176.0"></omgdi:waypoint>
+        <omgdi:waypoint x="191.0" y="218.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="43.0" x="201.0" y="187.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow12" id="BPMNEdge_flow12">
+        <omgdi:waypoint x="70.0" y="218.0"></omgdi:waypoint>
+        <omgdi:waypoint x="45.0" y="190.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow13" id="BPMNEdge_flow13">
+        <omgdi:waypoint x="682.0" y="54.0"></omgdi:waypoint>
+        <omgdi:waypoint x="730.0" y="60.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow14" id="BPMNEdge_flow14">
+        <omgdi:waypoint x="122.0" y="161.0"></omgdi:waypoint>
+        <omgdi:waypoint x="27.0" y="173.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow15" id="BPMNEdge_flow15">
+        <omgdi:waypoint x="45.0" y="67.0"></omgdi:waypoint>
+        <omgdi:waypoint x="120.0" y="53.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow18" id="BPMNEdge_flow18">
+        <omgdi:waypoint x="489.0" y="98.0"></omgdi:waypoint>
+        <omgdi:waypoint x="601.0" y="116.0"></omgdi:waypoint>
+        <omgdi:waypoint x="655.0" y="128.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow19" id="BPMNEdge_flow19">
+        <omgdi:waypoint x="635.0" y="148.0"></omgdi:waypoint>
+        <omgdi:waypoint x="542.0" y="171.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="43.0" x="581.0" y="158.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow20" id="BPMNEdge_flow20">
+        <omgdi:waypoint x="655.0" y="128.0"></omgdi:waypoint>
+        <omgdi:waypoint x="629.0" y="85.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="30.0" x="659.0" y="111.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
